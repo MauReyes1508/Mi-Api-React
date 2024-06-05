@@ -2,28 +2,32 @@
   "name": "myapi",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node index.js",
+    "test": "cross-env NODE_ENV=test nodemon --exec mocha --require node_modules/@babel/register"
   },
   "author": "rau",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@babel/core": "^7.24.6",
-    "@babel/node": "^7.24.6",
-    "@babel/preset-env": "^7.24.6",
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "mysql2": "^3.9.9"
+    "mysql2": "^3.10.0",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.6",
+    "@babel/cli": "^7.24.7",
     "@babel/register": "^7.24.6",
     "chai": "^5.1.1",
     "chai-http": "^4.4.0",
+    "cross-env": "^7.0.3",
     "faker": "^6.6.6",
     "mocha": "^10.4.0",
-    "nodemon": "^3.1.2"
+    "nodemon": "^3.1.3"
   }
 }
