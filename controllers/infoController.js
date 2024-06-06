@@ -11,6 +11,7 @@ export default class infoController{
             res.json(result)
         }
         catch(error){
+            console.error('Error en store', error.message)
             res.status(500).json({'Error': error.message})
         }
         finally{
@@ -24,11 +25,30 @@ export default class infoController{
         try{
             const {nombre, descripcion, img, leftColor, rightColor} = req.body
             connection = await mysql.createConnection(db)
-            const [insertar] = await connection.execute("INSER INTO bob (nombre, descripcion, img, leftColor, rightColor) VALUES(?,?,?,?,?)" ,[nombre, descripcion, img, leftColor, rightColor])
-            console.log(insertar)
-            res.json(insertar)                       
+            const [insertar] = await connection.execute("INSERT INTO bob (nombre, descripcion, img, leftColor, rightColor) VALUES(?,?,?,?,?)" ,[nombre, descripcion, img, leftColor, rightColor])
+            console.log(insertar)                     
         }
         catch(error){
+            console.error('Error en store', error.message)
+            res.status(500).json({'Error': error.message})
+        }
+        finally{
+            if(connection){
+                await connection.end()
+            }
+        }
+    }
+    static async details(req, res){
+        let connection;
+        try{
+            const idB = req.params.id
+            connection = await mysql.createConnection(db)
+            const [obtener] = await connection.execute("SELECT * FROM bob WHERE id = ?", [idB]);
+            console.log(obtener)
+            res.status(200).json({ obtener })
+        }
+        catch(error){
+            console.error('Error en details', error.message)
             res.status(500).json({'Error': error.message})
         }
         finally{
