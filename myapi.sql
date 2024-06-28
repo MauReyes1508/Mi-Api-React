@@ -1,0 +1,2 @@
+-- Active: 1717517340761@@127.0.0.1@3306@myapi
+TRUNCATE TABLE `bob`;
